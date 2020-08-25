@@ -1,4 +1,6 @@
 import { FC, useState, Dispatch, SetStateAction } from 'react'
+import CardLayout from './card_layout'
+import { colors } from '../public/library.json'
 
 type Props = {
   isSlideIn: boolean,
@@ -6,25 +8,48 @@ type Props = {
 }
 
 const Slider: FC<Props> = ({isSlideIn, setSlideIn}) => {
+  const showCards = () => {
+    return(
+      <>
+        <CardLayout />
+          {/* left */}
+        <CardLayout />
+          {/* center */}
+        <CardLayout />
+          {/* right */}
+      </>
+    )
+  }
   return (
     <>
       <div className={isSlideIn?"blackBack":""}>
         <div
           className="slider"
           onClick={() => {
-            setSlideIn(!isSlideIn)
+            isSlideIn !== true ? setSlideIn(!isSlideIn) : function(){}
           }}
         >
+          <p
+            className="backAllow"
+            onClick={() => {
+              isSlideIn ? setSlideIn(!isSlideIn) : function(){}
+            }}
+          >
+            <img
+              src="/back.png"
+              alt="back"
+            />
+          </p>
           <section>
-            
+            {isSlideIn ? showCards() : function(){}}
           </section>
         </div>
       </div>
       <style jsx>{`
         .slider {
           height: 600px;
-          border: solid 3px #574AE2;
-          color: #574AE2;
+          border: solid 3px ${colors.violet};
+          color: ${colors.violet};
           border-radius: 10px;
           position: absolute;
           ${
@@ -44,7 +69,21 @@ const Slider: FC<Props> = ({isSlideIn, setSlideIn}) => {
           transition: all .4s;        
         }
         section {
-          
+          padding: 5%;
+          height: 100%;
+          width: 100%;
+          display: flex;
+          border-radius: 10px;
+          justify-content: space-between;
+        }
+        .backAllow {
+          position: absolute;
+          top: 0;
+          right: 10px;
+          transition: transform .4s;
+        }
+        .backAllow:hover {
+          transform: scale(0.8);
         }
       `}</style>
     </>
