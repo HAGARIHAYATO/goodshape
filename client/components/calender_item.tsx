@@ -12,6 +12,7 @@ import endOfMonth from 'date-fns/endOfMonth'
 import { getMonth } from 'date-fns'
 
 type Props = {
+  openFlag: boolean,
   selectDay: Dispatch<SetStateAction<Date>>,
   seletedDay: Date,
   getfullday: Array<getday>
@@ -23,7 +24,7 @@ type getday = {
   condition: number,
 }
 
-const getCalendarArray = date => {
+const getCalendarArray = (date: Date): Date[][] => {
   const sundays = eachWeekOfInterval({
     start: startOfMonth(date),
     end: endOfMonth(date)
@@ -34,7 +35,7 @@ const getCalendarArray = date => {
 }
 
 
-const CalenderItem: FC<Props> = ({selectDay, seletedDay, getfullday}) => {
+const CalenderItem: FC<Props> = ({openFlag, selectDay, seletedDay, getfullday}) => {
   const getEvent = (date: Date) => {
     const day = getfullday.filter(item => {
       return item.date == getDate(date) && getMonth(date) == getMonth(targetDate)
@@ -103,8 +104,12 @@ const CalenderItem: FC<Props> = ({selectDay, seletedDay, getfullday}) => {
         }
         .item {
           height: 100%;
-          width: 70%;
-          background-color: white;
+          width: 100%;
+          padding: 0 5%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          
           text-align: center;
         }
         table {
@@ -125,6 +130,11 @@ const CalenderItem: FC<Props> = ({selectDay, seletedDay, getfullday}) => {
         }
         .selected {
           background-color: lightgray !important;
+          transition: background-color .4s;
+        }
+        .selected p {
+          color: #574AE2 !important;
+          font-weight: bold;
         }
         .date__box {
           height: 10%;

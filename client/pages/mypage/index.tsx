@@ -1,15 +1,16 @@
+import { useState } from 'react'
 import CalenderLayout from '../../components/calender_layout'
 import Slider from '../../components/slider'
 
 export default function Index() {
+  let [isSlideIn, setSlideIn] = useState(false)
   return (
     <div className="main">
       <div className="main__container">
         <CalenderLayout />
       </div>
       <div className="bottom__container">
-        <Slider />
-        <Slider />
+        <Slider isSlideIn={isSlideIn} setSlideIn={setSlideIn} />
       </div>
       <style jsx>{`
         .main {
@@ -25,8 +26,7 @@ export default function Index() {
         .bottom__container {
           padding: 2% 0 0 0;
           width: 100%;
-          display: flex;
-          justify-content: space-between;
+          position: ${isSlideIn?"static":"relative"}; 
         }
       `}</style>
     </div>

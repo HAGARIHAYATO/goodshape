@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-const Page: FC = () => {
+const CardLayout: FC = () => {
   return (
     <>
       
@@ -8,4 +8,4 @@ const Page: FC = () => {
   )
 }
 
-export default Page
+export default CardLayout
